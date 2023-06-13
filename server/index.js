@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(
     cors({
-        origin: ["https://nested-todo-nikbk.vercel.app/"],
+        origin: ["https://nested-todo-nikbk.vercel.app"],
         methods: ["GET", "POST"],
         credentials: true,
     })
@@ -34,7 +34,16 @@ app.use(
     })
 );
 
-const userData = [{ username: "testuser@gmail.com", password: "test" }];
+const userData = [{
+    username: "testuser@gmail.com", password: ""
+}];
+
+bcrypt.hash("test", saltRounds, (err, hash) => {
+    if (err) {
+        console.log(err);
+    }
+    userData[0].password = hash;
+})
 
 app.post("/register", (req, res) => {
     const username = req.body.username;
@@ -47,6 +56,11 @@ app.post("/register", (req, res) => {
         }
         userData.push({ username, password: hash });
     });
+    res.send(userData);
+});
+
+app.get("/register", (req, res) => {
+    console.log(userData);
     res.send(userData);
 });
 
