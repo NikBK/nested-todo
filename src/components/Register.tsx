@@ -9,7 +9,7 @@ export default function Register() {
     Axios.defaults.withCredentials = true;
 
     const register = () => {
-        Axios.post("https://nested-todo-nikbk.vercel.app/register", {
+        Axios.post("https://nested-todo-backend-nikbk.vercel.app/register", {
             username: usernameReg,
             password: passwordReg,
         }).then((response) => {
