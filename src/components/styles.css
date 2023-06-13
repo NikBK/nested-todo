@@ -1,0 +1,217 @@
+.flex {
+    display: flex;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    /* background-color: #d4e9fb; */
+}
+
+.navbar h4 {
+    margin: 0;
+    color: white;
+}
+
+.btn {
+    padding: 6px 10px;
+    margin: 0 10px;
+    background-color: #00d0ff;
+    border-radius: 5px;
+    /* border-color: white;
+    border-style: groove; */
+    border: none;
+}
+
+.disable-anchor-css {
+    text-decoration: none;
+    color: black;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.landing-page,
+.home {
+    margin-top: 50px;
+}
+
+.tasker {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.todo-header {
+    display: inline-flex;
+    background: #212121;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#input-task {
+    color: white;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.todo-header input {
+    flex-grow: 2;
+}
+
+.todo-header input,
+.todo-header button {
+    color: #fff;
+    box-sizing: border-box;
+    font-size: 1em;
+    padding: 14px;
+}
+
+.todo-header button {
+    background: #00b934;
+    border: none;
+    border-left: 1px solid #098009;
+    cursor: pointer;
+}
+
+.tasker .error {
+    display: none;
+    background: #ff4747;
+    color: #fff;
+    padding: 14px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.text-red {
+    color: red;
+}
+
+.bg-lightGreen {
+    background-color: #86ef86;
+    border-width: inherit;
+}
+
+.todo-lists {
+    padding: 10px;
+    margin: 10px;
+}
+
+.todo-lists h2 {
+    text-align: left;
+    color: white;
+    ;
+}
+
+.task {
+    padding-left: 30px;
+    text-align: left;
+    margin: 0 auto;
+}
+
+.task .task-detail {
+    /* background: antiquewhite; */
+    height: 32px;
+    width: 400px;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid white;
+}
+
+.task-name {
+    color: white;
+}
+
+.delete-icon {
+    opacity: .6;
+}
+
+.delete-icon:hover {
+    cursor: pointer;
+    color: red;
+    opacity: 1;
+}
+
+.task-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 50%;
+}
+
+.subtask-input {
+    margin-bottom: 10px;
+    margin-left: 30px;
+    border: none;
+    outline: none;
+    background: transparent;
+    border-bottom: 1px solid black;
+    line-height: 1.5rem;
+    color: white;
+}
+
+span.save-icon,
+span.cancel-icon {
+    padding-left: 10px;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+}
+
+span.save-icon:hover {
+    cursor: pointer;
+    color: #00b934;
+}
+
+span.cancel-icon:hover {
+    cursor: pointer;
+    color: #ff4747;
+}
+
+.login,
+.registration {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login h1,
+.registration h1 {
+    margin-bottom: 50px;
+}
+
+.input-holder {
+    margin: 20px 10px;
+}
+
+.input-holder span {
+    width: 100px;
+    display: inline-block;
+}
+
+.input-holder input {
+    outline: none;
+    line-height: 1.5rem;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 10px;
+}
+
+.login-btn,
+.register-btn {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.login a,
+.registration a {
+    height: 0;
+}
