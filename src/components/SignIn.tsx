@@ -1,10 +1,10 @@
-import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useGlobalContext } from "./Context";
 
 export const SignIn = () => {
-    const { setLoggedIn } = useGlobalContext();
+    const { loggedIn, setLoggedIn } = useGlobalContext();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -15,12 +15,17 @@ export const SignIn = () => {
             username: username,
             password: password,
         }).then((response) => {
-            if (response.data.message) {
+            console.log(response.data);
+            if (response.data.username) {
+                setLoggedIn(true);
                 // setLoginStatus(response.data.message);
             } else {
+                setLoggedIn(false);
                 // setLoginStatus(response.data.username);
             }
         });
+        setUsername("");
+        setPassword("");
     };
 
     useEffect(() => {
@@ -34,32 +39,40 @@ export const SignIn = () => {
 
     return (
         <>
-            <div className="login">
-                <h1>Login</h1>
-                <div className="input-holder">
-                    <span>Name</span>
-                    <input
-                        type="text"
-                        placeholder="Username..."
-                        onChange={(e) => {
-                            setUsername(e.target.value);
-                        }}
-                    />
-                </div>
-                <div className="input-holder">
-                    <span>Password</span>
-                    <input
-                        type="password"
-                        placeholder="Password..."
-                        onChange={(e) => {
-                            setPassword(e.target.value);
-                        }}
-                    />
-                </div>
-                <Link to="/home">
-                    <button onClick={login} className="btn login-btn">Login</button>
-                </Link>
-            </div>
+            {!loggedIn ? (
+                <>
+                    <div className="login">
+                        <h1>Login</h1>
+                        <div className="input-holder">
+                            <span>Name</span>
+                            <input
+                                type="text"
+                                placeholder="Username..."
+                                value={username}
+                                onChange={(e) => {
+                                    setUsername(e.target.value);
+                                }}
+                            />
+                        </div>
+                        <div className="input-holder">
+                            <span>Password</span>
+                            <input
+                                type="password"
+                                placeholder="Password..."
+                                value={password}
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                }}
+                            />
+                        </div>
+                        <a>
+                            <button onClick={login} className="btn login-btn">Login</button>
+                        </a>
+                    </div>
+                </>) : (
+                <Navigate to="/home" />
+            )}
+
 
         </>
     );

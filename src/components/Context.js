@@ -12,7 +12,7 @@ const initialTodos = {
 };
 
 const GlobalContext = ({ children }) => {
-    const [loggedIn, setLoggedIn] = useState(true);
+    const [loggedIn, setLoggedIn] = useState(false);
     const [todos, setTodos] = useState(initialTodos);
 
     return (
