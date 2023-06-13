@@ -11,7 +11,7 @@ export const SignIn = () => {
     // const [loginStatus, setLoginStatus] = useState("");
 
     const login = () => {
-        Axios.post("http://localhost:3333/login", {
+        Axios.post("https://nested-todo-nikbk.vercel.app/login", {
             username: username,
             password: password,
         }).then((response) => {
@@ -24,7 +24,7 @@ export const SignIn = () => {
     };
 
     useEffect(() => {
-        Axios.get("http://localhost:3333/login").then((response) => {
+        Axios.get("https://nested-todo-nikbk.vercel.app/login").then((response) => {
             if (response.data.loggedIn === true) {
                 setLoggedIn(true);
                 // setLoginStatus(response.data.user.username);
