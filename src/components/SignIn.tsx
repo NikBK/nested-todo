@@ -12,8 +12,6 @@ export const SignIn = () => {
     const [password, setPassword] = useState("");
     const [message, setMessage] = useState("");
 
-    // const [loginStatus, setLoginStatus] = useState("");
-
     const login = () => {
         if (username && password) {
             Axios.post(`${BACK_END_URL}/login`, {
@@ -24,11 +22,9 @@ export const SignIn = () => {
                     localStorage.setItem("token", response.data.token);
                     setLoggedIn(true);
                     setMessage("");
-                    // setLoginStatus(response.data.message);
                 } else {
                     setLoggedIn(false);
                     setMessage(response.data.message);
-                    // setLoginStatus(response.data.username);
                 }
             });
             setUsername("");
