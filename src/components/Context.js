@@ -13,7 +13,7 @@ const initialTodos = {
 
 const GlobalContext = ({ children }) => {
     const [loggedIn, setLoggedIn] = useState(localStorage.getItem("token") ? true : false);
-    const [todos, setTodos] = useState(initialTodos);
+    const [todos, setTodos] = useState(JSON.parse(localStorage.getItem("todos")) || initialTodos);
 
     return (
         <ContextProvider.Provider value={{ loggedIn, setLoggedIn, todos, setTodos }}>

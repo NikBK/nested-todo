@@ -13,6 +13,7 @@ export const Home = () => {
     function deleteTodo(id: string): void {
         const newTodo = findAndDeleteTodo(todos, id);
         setTodos({ ...newTodo });
+        localStorage.setItem("todos", JSON.stringify(todos));
     }
 
     function addTodo(): void {
@@ -23,6 +24,7 @@ export const Home = () => {
                 items: []
             }
             setTodos({ ...todos, items: [...todos.items, newTodo] });
+            localStorage.setItem("todos", JSON.stringify(todos));
             setInput("");
         }
     }

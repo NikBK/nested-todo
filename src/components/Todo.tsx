@@ -27,6 +27,7 @@ const Todo = ({ todo, deleteTodo }: Props) => {
         if (subTask && subTask.trim().length > 0) {
             const newTodo = appendSubTodo(todos, todo.id, subTask);
             setTodos(newTodo);
+            localStorage.setItem("todos", JSON.stringify(newTodo));
             setSubTask("");
         }
     }
