@@ -24,9 +24,11 @@ const Todo = ({ todo, deleteTodo }: Props) => {
     }
 
     function addSubTask(): void {
-        const newTodo = appendSubTodo(todos, todo.id, subTask);
-        setTodos(newTodo);
-        setSubTask("");
+        if (subTask && subTask.trim().length > 0) {
+            const newTodo = appendSubTodo(todos, todo.id, subTask);
+            setTodos(newTodo);
+            setSubTask("");
+        }
     }
 
     return (
@@ -45,7 +47,6 @@ const Todo = ({ todo, deleteTodo }: Props) => {
                         onChange={(e) => setSubTask(e.target.value)}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') {
-                                console.log('do validate');
                                 addSubTask();
                             }
                         }}

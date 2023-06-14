@@ -43,7 +43,6 @@ export const Home = () => {
                                     value={input}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter') {
-                                            console.log('do validate');
                                             addTodo();
                                         }
                                     }}
