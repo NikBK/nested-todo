@@ -12,12 +12,14 @@ export default function Register() {
     Axios.defaults.withCredentials = true;
 
     const register = () => {
-        Axios.post(`${BACK_END_URL}/register`, {
-            username: usernameReg,
-            password: passwordReg,
-        }).then((response) => {
-            console.log(response);
-        });
+        if (usernameReg && passwordReg) {
+            Axios.post(`${BACK_END_URL}/register`, {
+                username: usernameReg,
+                password: passwordReg,
+            }).then((response) => {
+                console.log(response);
+            });
+        }
     };
 
     return (

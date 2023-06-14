@@ -15,23 +15,28 @@ export const SignIn = () => {
     // const [loginStatus, setLoginStatus] = useState("");
 
     const login = () => {
-        Axios.post(`${BACK_END_URL}/login`, {
-            username: username,
-            password: password,
-        }).then((response) => {
-            if (response.data.auth) {
-                localStorage.setItem("token", response.data.token);
-                setLoggedIn(true);
-                setMessage("");
-                // setLoginStatus(response.data.message);
-            } else {
-                setLoggedIn(false);
-                setMessage(response.data.message);
-                // setLoginStatus(response.data.username);
-            }
-        });
-        setUsername("");
-        setPassword("");
+        if (username && password) {
+            Axios.post(`${BACK_END_URL}/login`, {
+                username: username,
+                password: password,
+            }).then((response) => {
+                if (response.data.auth) {
+                    localStorage.setItem("token", response.data.token);
+                    setLoggedIn(true);
+                    setMessage("");
+                    // setLoginStatus(response.data.message);
+                } else {
+                    setLoggedIn(false);
+                    setMessage(response.data.message);
+                    // setLoginStatus(response.data.username);
+                }
+            });
+            setUsername("");
+            setPassword("");
+        }
+        else {
+            setMessage("Please enter username & password");
+        }
     };
 
     useEffect(() => {
