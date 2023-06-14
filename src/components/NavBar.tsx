@@ -22,16 +22,16 @@ const NavBar = () => {
                             <button className='btn'>Todos</button>
                         </Link>
                         <Link to="/">
-                            <button className='btn' onClick={handleLogging}>Sign Out</button>
+                            <button className='btn' onClick={handleLogging}>Log out</button>
                         </Link>
                     </>
                 ) : (
                     <>
                         <Link to="/signIn">
-                            <button className='btn' onClick={() => { }}>Log In</button>
+                            <button className='btn'>Log In</button>
                         </Link>
                         <Link to="/register">
-                            <button className='btn' onClick={() => { }}>Sign Up</button>
+                            <button className='btn'>Sign Up</button>
                         </Link>
                     </>
                 )}
