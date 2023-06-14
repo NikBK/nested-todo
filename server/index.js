@@ -14,7 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(
     cors({
-        origin: ["https://nested-todo-nikbk.vercel.app"],
+        origin: [process.env.FRONT_END_URL],
         methods: ["GET", "POST"],
         credentials: true,
     })

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import Axios from "axios";
 import { useGlobalContext } from "./Context";
 
+const BACK_END_URL = "https://nested-todo-backend-nikbk.vercel.app";
+
 export const SignIn = () => {
     const { loggedIn, setLoggedIn } = useGlobalContext();
     const [username, setUsername] = useState("");
@@ -11,7 +13,7 @@ export const SignIn = () => {
     // const [loginStatus, setLoginStatus] = useState("");
 
     const login = () => {
-        Axios.post("https://nested-todo-backend-nikbk.vercel.app/login", {
+        Axios.post(`${BACK_END_URL}/login`, {
             username: username,
             password: password,
         }).then((response) => {
@@ -29,7 +31,7 @@ export const SignIn = () => {
     };
 
     useEffect(() => {
-        Axios.get("https://nested-todo-backend-nikbk.vercel.app/login").then((response) => {
+        Axios.get(`${BACK_END_URL}/login`).then((response) => {
             if (response.data.loggedIn === true) {
                 setLoggedIn(true);
                 // setLoginStatus(response.data.user.username);

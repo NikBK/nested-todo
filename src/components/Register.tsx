@@ -2,6 +2,8 @@ import { useState } from "react";
 import Axios from "axios";
 import { Link } from "react-router-dom";
 
+const BACK_END_URL = "https://nested-todo-backend-nikbk.vercel.app";
+
 export default function Register() {
     const [usernameReg, setUsernameReg] = useState("");
     const [passwordReg, setPasswordReg] = useState("");
@@ -9,7 +11,7 @@ export default function Register() {
     Axios.defaults.withCredentials = true;
 
     const register = () => {
-        Axios.post("https://nested-todo-backend-nikbk.vercel.app/register", {
+        Axios.post(`${BACK_END_URL}/register`, {
             username: usernameReg,
             password: passwordReg,
         }).then((response) => {
