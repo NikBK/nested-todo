@@ -10,11 +10,15 @@ const saltRounds = 10;
 require('dotenv').config();
 
 const app = express();
+const FRONT_END_URL = "https://nested-todo-nikbk.vercel.app";
+// const FRONT_END_URL = "http://localhost:3000";
+
+const jwt = require("jsonwebtoken");
 
 app.use(express.json());
 app.use(
     cors({
-        origin: [process.env.FRONT_END_URL],
+        origin: [FRONT_END_URL],
         methods: ["GET", "POST"],
         credentials: true,
     })
@@ -35,40 +39,43 @@ app.use(
 );
 
 const userData = [{
-    username: "testuser@gmail.com", password: ""
+    id: new Date().getTime().toString(),
+    username: "testuser@gmail.com",
+    password: ""
 }];
 
-bcrypt.hash("test", saltRounds, (err, hash) => {
-    if (err) {
-        console.log(err);
-    }
-    userData[0].password = hash;
-})
+const updateTestUserPassword = () => {
+    bcrypt.hash("test", saltRounds, (err, hash) => {
+        if (err) {
+            console.log(err);
+        }
+        userData[0].password = hash;
+    })
+}
+updateTestUserPassword();
 
 app.post("/register", (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
-    console.log({ username, password });
 
     bcrypt.hash(password, saltRounds, (err, hash) => {
         if (err) {
             console.log(err);
         }
-        userData.push({ username, password: hash });
+        userData.push({ id: new Date().getTime().toString(), username, password: hash });
     });
     res.send(userData);
 });
 
 app.get("/register", (req, res) => {
-    console.log(userData);
     res.send(userData);
 });
 
 app.get("/login", (req, res) => {
     if (req.session.user) {
-        res.send({ loggedIn: true, user: req.session.user });
+        res.json({ loggedIn: true, user: req.session.user });
     } else {
-        res.send({ loggedIn: false });
+        res.json({ loggedIn: false });
     }
 });
 
@@ -78,15 +85,19 @@ app.post("/login", (req, res) => {
 
     const curUser = userData.find((obj) => obj.username === username);
     if (!curUser) {
-        res.send({ message: "User doesn't exist" });
+        res.json({ auth: false, message: "User doesn't exist" });
     }
     else {
         bcrypt.compare(password, curUser.password, (error, response) => {
             if (response) {
+                const id = curUser.id;
+                const token = jwt.sign({ id }, "MYSCRECTKEY", {
+                    expiresIn: 300,
+                })
                 req.session.user = curUser;
-                res.send(curUser);
+                res.json({ auth: true, token, curUser });
             } else {
-                res.send({ message: "Wrong username/password combination!" });
+                res.json({ auth: false, message: "Wrong username/password combination!" });
             }
         });
     }

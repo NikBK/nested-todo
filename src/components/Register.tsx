@@ -3,6 +3,7 @@ import Axios from "axios";
 import { Link } from "react-router-dom";
 
 const BACK_END_URL = "https://nested-todo-backend-nikbk.vercel.app";
+// const BACK_END_URL = "http://localhost:3333";
 
 export default function Register() {
     const [usernameReg, setUsernameReg] = useState("");
@@ -15,7 +16,7 @@ export default function Register() {
             username: usernameReg,
             password: passwordReg,
         }).then((response) => {
-            // console.log(response);
+            console.log(response);
         });
     };
 

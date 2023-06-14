@@ -215,3 +215,8 @@ span.cancel-icon:hover {
 .registration a {
     height: 0;
 }
+
+.wrong-user-message {
+    margin-top: 80px;
+    color: darkorange;
+}

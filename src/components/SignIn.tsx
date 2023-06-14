@@ -4,11 +4,13 @@ import Axios from "axios";
 import { useGlobalContext } from "./Context";
 
 const BACK_END_URL = "https://nested-todo-backend-nikbk.vercel.app";
+// const BACK_END_URL = "http://localhost:3333";
 
 export const SignIn = () => {
     const { loggedIn, setLoggedIn } = useGlobalContext();
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [message, setMessage] = useState("");
 
     // const [loginStatus, setLoginStatus] = useState("");
 
@@ -17,12 +19,14 @@ export const SignIn = () => {
             username: username,
             password: password,
         }).then((response) => {
-            console.log(response.data);
-            if (response.data.username) {
+            if (response.data.auth) {
+                localStorage.setItem("token", response.data.token);
                 setLoggedIn(true);
+                setMessage("");
                 // setLoginStatus(response.data.message);
             } else {
                 setLoggedIn(false);
+                setMessage(response.data.message);
                 // setLoginStatus(response.data.username);
             }
         });
@@ -31,12 +35,20 @@ export const SignIn = () => {
     };
 
     useEffect(() => {
-        Axios.get(`${BACK_END_URL}/login`).then((response) => {
-            if (response.data.loggedIn === true) {
-                setLoggedIn(true);
-                // setLoginStatus(response.data.user.username);
-            }
-        });
+        const userToken = localStorage.getItem("token");
+        if (userToken) {
+            setLoggedIn(true);
+        }
+        else {
+            setLoggedIn(false);
+        }
+        // Axios.get(`${BACK_END_URL}/login`).then((response) => {
+        //     console.log("checking loading of useEffect")
+        //     if (response.data.loggedIn === true) {
+        //         setLoggedIn(true);
+        //         // setLoginStatus(response.data.user.username);
+        //     }
+        // });
     }, []);
 
     return (
@@ -70,11 +82,11 @@ export const SignIn = () => {
                         <a>
                             <button onClick={login} className="btn login-btn">Login</button>
                         </a>
+                        <div className="wrong-user-message">{message}</div>
                     </div>
                 </>) : (
                 <Navigate to="/home" />
             )}
-
 
         </>
     );

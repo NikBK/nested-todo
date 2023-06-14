@@ -6,7 +6,8 @@ const NavBar = () => {
     const { loggedIn, setLoggedIn } = useGlobalContext();
 
     const handleLogging = () => {
-        setLoggedIn((prev: boolean) => !prev);
+        localStorage.removeItem("token");
+        setLoggedIn(false);
     }
 
     return (
